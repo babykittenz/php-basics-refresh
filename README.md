@@ -4,7 +4,7 @@
 **Purpose**: Understanding the architectural layers of a PHP application and their responsibilities.
 
 ### My Learning Goals
-- [ ] 
+- [ Build scaleable maintainable code ] 
 - [ ] 
 - [ ] 
 
