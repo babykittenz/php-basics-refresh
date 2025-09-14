@@ -1,15 +1,13 @@
 <?php
 
 require 'router.php';
+require 'Database.php';
 
-$dsn = '';
-// connect to postgres database
-$pdo = new PDO($dsn);
-// prepare statement
-$statement = $pdo->prepare('SELECT * from posts');
-// execute statement
-$statement->execute();
-// fetch all results
-$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+$config = require 'config.php';
+$db = new PGSQLDatabase($config['database']);
+$id = $_GET['id'];
+$query = 'SELECT * from posts where id = :id';
+
+$posts = $db->query($query, [':id' =>$id])->fetch();
 
 print_r($posts);
