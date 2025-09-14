@@ -1,3 +1,9 @@
+<!--import isActiveNavigation from 'isActiveNavigation.php';-->
+
+<?php
+    require_once __DIR__ . '/../../helpers/isActiveNavigation.php';
+?>
+
 <nav class="bg-gray-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
@@ -7,9 +13,9 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="/" aria-current="page" class="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white">Home</a>
-                        <a href="/about.php" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">About</a>
-                        <a href="/contact.php" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
+                        <a href="/" aria-current="page" class="<?= isActiveNavigation('/') ?> px-3 py-2 text-sm font-medium text-white">Home</a>
+                        <a href="/about" class="<?= isActiveNavigation('/about') ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">About</a>
+                        <a href="/contact" class="<?= isActiveNavigation('/contact') ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
                     </div>
                 </div>
             </div>
@@ -33,8 +39,8 @@
 
                         <div id="userDropdown" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <a href="/" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Your profile</a>
-                            <a href="/about.php" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Settings</a>
-                            <a href="/contact.php" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Sign out</a>
+                            <a href="/about" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Settings</a>
+                            <a href="/contact" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Sign out</a>
                         </div>
                     </div>
                 </div>
