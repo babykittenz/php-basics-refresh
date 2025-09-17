@@ -15,6 +15,7 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="/" aria-current="page" class="<?= isActiveNavigation('/') ?> px-3 py-2 text-sm font-medium text-white">Home</a>
                         <a href="/about" class="<?= isActiveNavigation('/about') ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">About</a>
+                        <a href="/notes" class="<?= isActiveNavigation('/notes') ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Notes</a>
                         <a href="/contact" class="<?= isActiveNavigation('/contact') ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
                     </div>
                 </div>
@@ -68,6 +69,7 @@
         <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
             <a href="/" aria-current="page" class="block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white">Home</a>
             <a href="/about" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">About</a>
+            <a href="/notes" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Notes</a>
             <a href="/contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
         </div>
         <div class="border-t border-white/10 pt-4 pb-3">

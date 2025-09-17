@@ -1,13 +1,10 @@
 <?php
 
-require 'router.php';
+require 'functions.php';
 require 'Database.php';
+require 'router.php';
 
-$config = require 'config.php';
-$db = new PGSQLDatabase($config['database']);
-$id = $_GET['id'];
-$query = 'SELECT * from posts where id = :id';
 
-$posts = $db->query($query, [':id' =>$id])->fetch();
 
-print_r($posts);
+
+
