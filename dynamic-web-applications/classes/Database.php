@@ -2,6 +2,7 @@
 
 class PGSQLDatabase {
     public $connection;
+    protected $statement;
     public function __construct($config)
     {
         $dsn = 'pgsql:' . http_build_query($config, '', ';');
@@ -10,10 +11,29 @@ class PGSQLDatabase {
     public function query($query, $params = [])
     {
         // prepare statement
-        $statement = $this->connection->prepare($query);
+        $this->statement = $this->connection->prepare($query);
         // execute statement
-        $statement->execute($params);
+        $this->statement->execute($params);
         // fetch all results
-        return $statement;
+        return $this;
+    }
+
+    public function find()
+    {
+        return $this->statement->fetch();
+    }
+
+    public function findOrFail()
+    {
+        $result = $this->find();
+        if (!$result) {
+            abort(RESPONSE::NOT_FOUND);
+        }
+        return $result;
+    }
+
+    public function findAll()
+    {
+        return $this->statement->fetchAll();
     }
 }
