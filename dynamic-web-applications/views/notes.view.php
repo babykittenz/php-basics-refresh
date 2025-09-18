@@ -9,7 +9,7 @@ require 'partials/banner.php';
             <div class="rounded-lg bg-gray-800/50 p-6">
                 <h2 class="text-xl font-semibold text-white mb-4">Welcome to your Notes</h2>
                 <?php foreach ($notes as $note) : ?>
-                    <li class="text-white"><a class="text-blue underline" href="/note?id=<?= $note['id']?>"> <?= $note['body'] ?> </a></li>
+                    <li class="text-blue-500 text-underline"><a class="text-blue underline" href="/note?id=<?= $note['id']?>"> <?= $note['body'] ?> </a></li>
                 <?php endforeach; ?>
             </div>
         </div>
