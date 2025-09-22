@@ -27,13 +27,35 @@ class PGSQLDatabase {
     {
         $result = $this->find();
         if (!$result) {
-            abort(RESPONSE::NOT_FOUND);
+            abort(Response::NOT_FOUND);
         }
         return $result;
     }
 
-    public function findAll()
+    public function get()
     {
         return $this->statement->fetchAll();
+    }
+    public function getOrFail()
+    {
+        $result = $this->get();
+        if (!$result) {
+            abort(Response::NOT_FOUND);
+        }
+        return $result;
+    }
+
+    public function insert($data)
+    {
+        $this->statement->execute($data);
+        return $this->connection->lastInsertId();
+    }
+    public function insertOrFail($data){
+        $success = $this->insert($data);
+        if(!$success){
+            abort(Response::NOT_FOUND);
+        }
+        return $success;
+
     }
 }
