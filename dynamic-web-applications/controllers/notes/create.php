@@ -1,15 +1,15 @@
 <?php
 
-require 'classes/Validator.php';
-$config = require 'config.php';
+require base_path('Core/Validator.php');
+
+$config = require base_path('config.php');
 $db = new PGSQLDatabase($config['database']);
 
-
-$heading = 'Create Note';
+$errors = [];
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    $errors = [];
+
 
     // grab the data from the form
     $title = $_POST['title'];
@@ -37,4 +37,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 }
 
-require "views/notes/create.view.php";
+view('notes/create', ['heading' => 'Create Note', 'errors' => $errors]);

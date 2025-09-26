@@ -1,13 +1,17 @@
 <?php
 
-class PGSQLDatabase {
+
+class PGSQLDatabase
+{
     public $connection;
     protected $statement;
+
     public function __construct($config)
     {
         $dsn = 'pgsql:' . http_build_query($config, '', ';');
         $this->connection = new PDO($dsn, 'michaelkidby', '', [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
     }
+
     public function query($query, $params = [])
     {
         // prepare statement
@@ -36,6 +40,7 @@ class PGSQLDatabase {
     {
         return $this->statement->fetchAll();
     }
+
     public function getOrFail()
     {
         $result = $this->get();
@@ -50,9 +55,11 @@ class PGSQLDatabase {
         $this->statement->execute($data);
         return $this->connection->lastInsertId();
     }
-    public function insertOrFail($data){
+
+    public function insertOrFail($data)
+    {
         $success = $this->insert($data);
-        if(!$success){
+        if (!$success) {
             abort(Response::NOT_FOUND);
         }
         return $success;

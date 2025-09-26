@@ -2,5 +2,5 @@
 
 function abort($code){
     http_response_code($code);
-    require 'controllers/' . $code . '.php';
+    require base_path('controllers/' . $code . '.php');
 }

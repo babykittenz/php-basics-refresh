@@ -1,7 +1,7 @@
 <!--import isActiveNavigation from 'isActiveNavigation.php';-->
 
 <?php
-    require_once __DIR__ . '/../../helpers/isActiveNavigation.php';
+    require base_path('Core/helpers/isActiveNavigation.php');
 ?>
 
 <nav class="bg-gray-800/50">

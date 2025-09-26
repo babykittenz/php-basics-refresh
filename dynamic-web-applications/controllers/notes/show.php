@@ -1,7 +1,8 @@
 <?php
 
 // set up db
-$config = require 'config.php';
+
+$config = require base_path('config.php');
 $db = new PGSQLDatabase($config['database']);
 
 // grab current user
@@ -16,4 +17,4 @@ $heading = htmlspecialchars($note['title']);
 // check if the user is authorized to view note if not send them to the unauthorized page
 authorize($note['user_id'] === $currentUserId);
 
-require "views/notes/show.view.php";
+view('notes/show', ['heading' => $heading, 'note' => $note]);
