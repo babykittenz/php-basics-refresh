@@ -1,6 +1,7 @@
 <?php
 
 // set up db
+use Core\PGSQLDatabase;
 
 $config = require base_path('config.php');
 $db = new PGSQLDatabase($config['database']);

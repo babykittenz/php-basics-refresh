@@ -1,6 +1,7 @@
 <?php
 
-require base_path('Core/Validator.php');
+use Core\Validator;
+use Core\PGSQLDatabase;
 
 $config = require base_path('config.php');
 $db = new PGSQLDatabase($config['database']);
