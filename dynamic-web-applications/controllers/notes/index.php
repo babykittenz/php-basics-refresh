@@ -1,9 +1,9 @@
 <?php
 
+use Core\App;
 use Core\PGSQLDatabase;
 
-$config = require base_path('config.php');
-$db = new PGSQLDatabase($config['database']);
+$db = App::resolve(PGSQLDatabase::class);
 
 $notes = $db->query('SELECT * FROM notes')->getOrFail();
 
