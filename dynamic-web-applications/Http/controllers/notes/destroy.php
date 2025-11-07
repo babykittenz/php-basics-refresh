@@ -6,7 +6,7 @@ use Core\PGSQLDatabase;
 // we handle the database as a singleton
 $db = App::resolve(PGSQLDatabase::class);
 
-$currentUserId = 6;
+$currentUserId = 16;
 
 $note = $db->query('select * from notes where id = :id', [
     'id' => $_POST['id']

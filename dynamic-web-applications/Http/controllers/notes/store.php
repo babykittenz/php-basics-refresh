@@ -6,16 +6,6 @@ use Core\App;
 
 $db = App::resolve(PGSQLDatabase::class);
 
-// grab current user
-$currentUserId = 6;
-
-$noteId = $_POST['id'] ?? $_GET['id'] ?? null;
-
-// find the note
-$note = $db->query('SELECT * FROM notes WHERE id = :id', [ 'id' => $noteId])->findOrFail();
-
-authorize($note['user_id'] === $currentUserId);
-
 $errors = [];
 
 if (! Validator::string($_POST['body'], 1, 1000)) {
@@ -25,18 +15,17 @@ if(!Validator::string($_POST['title'], 1, 25 )){
     $errors['title'] = 'Please enter a title with a length of at least 1 character and less than 25 characters';
 }
 
-if (count($errors)) {
-    return view('notes/edit', [
-        'heading' => 'Edit ' . htmlspecialchars($note['title']),
-        'errors' => $errors,
-        'note' => $note
+if (! empty($errors)) {
+    view("notes", [
+        'heading' => 'Notes',
+        'errors' => $errors
     ]);
 }
 
-$db->query('UPDATE notes set body = :body, title = :title WHERE id = :id',[
+$db->query('INSERT INTO notes(body, user_id, title) VALUES(:body, :user_id, :title)', [
     'body' => $_POST['body'],
     'title' => $_POST['title'],
-    'id' => $noteId
+    'user_id' => 16
 ]);
 
 header('location: /notes');

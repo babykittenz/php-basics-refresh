@@ -6,7 +6,7 @@ use Core\PGSQLDatabase;
 $db = App::resolve(PGSQLDatabase::class);
 
 // grab current user
-$currentUserId = 6;
+$currentUserId = 16;
 
 // find the note
 $note = $db->query('SELECT * FROM notes WHERE id = :id', [ 'id' => $_GET['id']])->findOrFail();

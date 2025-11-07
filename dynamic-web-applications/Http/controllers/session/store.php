@@ -2,27 +2,20 @@
 
 use Core\App;
 use Core\PGSQLDatabase;
-use Core\Validator;
+use Http\Forms\LoginForm;
 
 $db = App::resolve(PGSQLDatabase::class);
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$errors = [];
+$form = new LoginForm();
 
-if (!Validator::email($email)){
-    $errors['email'] = 'Please enter a valid email address';
-};
-
-if (!Validator::string($password)){
-    $errors['password'] = 'Please provide a valid password';
-};
-
-if(!empty($errors)){
-    view('session/create', [
-        'errors' => $errors
-    ]);
+if(!$form->validate($email, $password)){
+        view('session/create', [
+            // grab the errors from the form class
+            'errors' => $form->errors(),
+        ]);
 };
 
 $user = $db->query('SELECT * FROM users WHERE email = :email', ['email' => $email])->find();

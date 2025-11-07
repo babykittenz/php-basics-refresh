@@ -60,7 +60,7 @@ class Router
                 // apply the middleware only if it exists
                 Middleware::resolve($route['middleware']);
 
-                return require base_path($route['controller']);
+                return require base_path('Http/controllers/' . $route['controller']);
             }
         }
 
@@ -71,7 +71,7 @@ class Router
     {
         http_response_code($code);
 
-        require base_path("controllers/{$code}.php");
+        require base_path("Http/controllers/{$code}.php");
 
         die();
     }
