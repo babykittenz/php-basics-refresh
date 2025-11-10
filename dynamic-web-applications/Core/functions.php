@@ -2,6 +2,7 @@
 // we will only use functions php for the actual logic of debugging testing and developing.
 
 // create die dump function
+use Core\Session;
 use JetBrains\PhpStorm\NoReturn;
 
 #[NoReturn]
@@ -33,4 +34,8 @@ function redirect(string $path): void
 {
     header('location: ' . $path);
     exit();
+}
+
+function old(string $key, $default = ''): mixed{
+        return Session::get('old')[$key] ?? $default;
 }

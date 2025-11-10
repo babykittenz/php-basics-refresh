@@ -18,10 +18,7 @@ require base_path('views/partials/banner.php');
                         <div>
                             <label for="email" class="block text-sm/6 font-medium text-gray-100">Email address</label>
                             <div class="mt-2">
-                                <input id="email" type="email" name="email" required autocomplete="email" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                                <?php if (isset($errors['email'])): ?>
-                                    <p class="text-red-500 text-xs mt-2"><?= $errors['email'] ?></p>
-                                <?php endif; ?>
+                                <input value="<?= old('email') ?>" id="email" type="email" name="email" required autocomplete="email" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
                             </div>
                         </div>
 
@@ -31,9 +28,7 @@ require base_path('views/partials/banner.php');
                             </div>
                             <div class="mt-2">
                                 <input id="password" type="password" name="password" required autocomplete="current-password" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                                <?php if (isset($errors['password'])): ?>
-                                    <p class="text-red-500 text-xs mt-2"><?= $errors['password'] ?></p>
-                                <?php endif; ?>
+
                             </div>
                         </div>
 
@@ -41,7 +36,12 @@ require base_path('views/partials/banner.php');
                             <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Log In</button>
                         </div>
                     </form>
-
+                    <?php if (isset($errors['password'])): ?>
+                        <p class="text-red-500 text-xs mt-2"><?= $errors['password'] ?></p>
+                    <?php endif; ?>
+                    <?php if (isset($errors['email'])): ?>
+                        <p class="text-red-500 text-xs mt-2"><?= $errors['email'] ?></p>
+                    <?php endif; ?>
                 </div>
             </div>
 
