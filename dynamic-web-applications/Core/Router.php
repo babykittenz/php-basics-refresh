@@ -5,12 +5,13 @@ namespace Core;
 use Core\Middleware\Auth;
 use Core\Middleware\Guest;
 use Core\Middleware\Middleware;
+use JetBrains\PhpStorm\NoReturn;
 
 class Router
 {
-    protected $routes = [];
+    protected array $routes = [];
 
-    public function add($method, $uri, $controller)
+    public function add(string $method, string $uri, string $controller): self
     {
         $this->routes[] = [
             'uri' => $uri,
@@ -22,38 +23,41 @@ class Router
         return $this;
     }
 
-    public function get($uri, $controller)
+    public function get(string $uri, string $controller): self
     {
         return $this->add('GET', $uri, $controller);
     }
 
-    public function post($uri, $controller)
+    public function post(string $uri, string $controller): self
     {
         return $this->add('POST', $uri, $controller);
     }
 
-    public function delete($uri, $controller)
+    public function delete(string $uri, string $controller): self
     {
         return $this->add('DELETE', $uri, $controller);
     }
 
-    public function patch($uri, $controller)
+    public function patch(string $uri, string $controller): self
     {
         return $this->add('PATCH', $uri, $controller);
     }
 
-    public function put($uri, $controller)
+    public function put(string $uri, string $controller): self
     {
         return $this->add('PUT', $uri, $controller);
     }
 
-    public function only($key){
+    public function only(string $key): self{
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;
 
        return $this;
     }
 
-    public function route($uri, $method)
+    /**
+     * @throws \Exception
+     */
+    public function route(string $uri, string $method): string
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
@@ -67,7 +71,8 @@ class Router
         $this->abort();
     }
 
-    public static function abort($code = 404)
+    #[NoReturn]
+    public static function abort(int $code = 404): void
     {
         http_response_code($code);
 

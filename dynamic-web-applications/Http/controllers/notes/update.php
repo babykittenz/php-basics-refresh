@@ -26,7 +26,7 @@ if(!Validator::string($_POST['title'], 1, 25 )){
 }
 
 if (count($errors)) {
-    return view('notes/edit', [
+    view('notes/edit', [
         'heading' => 'Edit ' . htmlspecialchars($note['title']),
         'errors' => $errors,
         'note' => $note

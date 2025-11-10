@@ -1,38 +1,23 @@
 <?php
 
-use Core\App;
-use Core\PGSQLDatabase;
+use Core\Session;
 use Http\Forms\LoginForm;
-
-$db = App::resolve(PGSQLDatabase::class);
+use Core\Authenticator;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
 $form = new LoginForm();
 
-if(!$form->validate($email, $password)){
-        view('session/create', [
-            // grab the errors from the form class
-            'errors' => $form->errors(),
-        ]);
+if($form->validate($email, $password)){
+
+    if((new Authenticator)->attempt($email, $password)) {
+        redirect('/');
+    }
+
+    $form->error('email', 'No matching account for that email and password');
 };
 
-$user = $db->query('SELECT * FROM users WHERE email = :email', ['email' => $email])->find();
+Session::flash('errors', $form->errors());
 
-if($user){
-    if(password_verify($password, $user['password'])){
-        login([
-            'email' => $email,
-        ]);
-
-        header('location: /');
-        exit();
-    }
-}
-
-return view('session/create', [
-    'errors' => [
-        'password' => 'No matching account for that email and password'
-    ]
-]);
+redirect('/login');

@@ -4,7 +4,8 @@ use Core\Response;
 
 require 'abort.php';
 
-function routeToController($routes, $uri) {
+function routeToController(string $routes, string $uri): void
+{
     if(array_key_exists($uri['path'], $routes)) {
         require $routes[$uri['path']];
     }else{

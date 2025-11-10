@@ -6,5 +6,4 @@ return [
         'port' => 5432,
         'dbname' => 'myapp',
     ]
-
 ];

@@ -6,8 +6,8 @@ use PDO;
 
 class PGSQLDatabase
 {
-    public $connection;
-    protected $statement;
+    public mixed $connection;
+    protected mixed $statement;
 
     public function __construct($config)
     {
@@ -15,7 +15,7 @@ class PGSQLDatabase
         $this->connection = new PDO($dsn, 'michaelkidby', '', [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
     }
 
-    public function query($query, $params = [])
+    public function query(string $query, array $params = []): self
     {
         // prepare statement
         $this->statement = $this->connection->prepare($query);
@@ -25,12 +25,12 @@ class PGSQLDatabase
         return $this;
     }
 
-    public function find()
+    public function find(): mixed
     {
         return $this->statement->fetch();
     }
 
-    public function findOrFail()
+    public function findOrFail(): mixed
     {
         $result = $this->find();
         if (!$result) {
@@ -39,12 +39,12 @@ class PGSQLDatabase
         return $result;
     }
 
-    public function get()
+    public function get(): array
     {
         return $this->statement->fetchAll();
     }
 
-    public function getOrFail()
+    public function getOrFail(): array
     {
         $result = $this->get();
         if (!$result) {
@@ -53,13 +53,13 @@ class PGSQLDatabase
         return $result;
     }
 
-    public function insert($data)
+    public function insert(mixed $data): false|string
     {
         $this->statement->execute($data);
         return $this->connection->lastInsertId();
     }
 
-    public function insertOrFail($data)
+    public function insertOrFail(mixed $data): false|string
     {
         $success = $this->insert($data);
         if (!$success) {

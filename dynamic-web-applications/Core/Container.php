@@ -5,8 +5,8 @@ use Exception;
 
 class Container
 {
-    protected $bindings = [];
-    public function bind($key, $resolver)
+    protected array $bindings = [];
+    public function bind(string $key, mixed $resolver): void
     {
         $this->bindings[$key] = $resolver;
     }
@@ -14,7 +14,7 @@ class Container
     /**
      * @throws Exception if no binding found for $key
      */
-    public function resolve($key)
+    public function resolve(string $key): mixed
     {
         if(!array_key_exists($key, $this->bindings)){
             throw new Exception("No binding found for {$key}");

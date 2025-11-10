@@ -4,12 +4,13 @@ namespace Core\Middleware;
 
 class Middleware
 {
-    public const MAP = [
+    public const array MAP = [
         'guest' => Guest::class,
         'auth' => Auth::class,
     ];
 
-    public static function resolve($key){
+    public static function resolve(mixed $key): void
+    {
 
         if(!$key){
             return;
